@@ -31,10 +31,6 @@ func Run(options *config.SqleOptions) error {
 	log.Logger().Infoln("starting sqled server")
 	defer log.Logger().Info("stop sqled server")
 
-	if sqleCnf.EnableClusterMode && options.ID == 0 {
-		return fmt.Errorf("server id is required on cluster mode")
-	}
-
 	secretKey := options.SecretKey
 	if secretKey != "" {
 		// reset jwt singing key, default dms token
@@ -105,7 +101,7 @@ func Run(options *config.SqleOptions) error {
 	server.InitSqled(exitChan)
 
 	var node cluster.Node
-	if sqleCnf.EnableClusterMode {
+	if options.EnableClusterMode {
 		cluster.IsClusterMode = true
 		log.Logger().Infoln("running sqled server on cluster mode")
 		node = cluster.DefaultNode

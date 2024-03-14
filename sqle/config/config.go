@@ -12,7 +12,6 @@ type SqleOptions struct {
 }
 
 type SeviceOpts struct {
-	EnableClusterMode  bool           `yaml:"enable_cluster_mode"`
 	AutoMigrateTable   bool           `yaml:"auto_migrate_table"`
 	DebugLog           bool           `yaml:"debug_log"`
 	LogPath            string         `yaml:"log_path"`
